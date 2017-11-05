@@ -68,7 +68,7 @@ public class LoginTest extends BaseTest{
 
 
     @Test(dataProvider = "users")
-    public void testMultiUserLogin(String username, String password) {
+    public void testMultiUserLoginSuccess(String username, String password) {
         LoginPO loginPO = new LoginPO(this.driver);
         loginPO.login(username, password);
 
@@ -79,8 +79,16 @@ public class LoginTest extends BaseTest{
         Assert.assertNotNull(homePO.welcomeUser);
     }
 
+    @Test(dataProvider = "invalid")
+    public void testMultiUserLoginFailure(String username, String password) {
+        LoginPO loginPO = new LoginPO(this.driver);
+        loginPO.login(username, password);
+
+        Assert.assertEquals("Invalid username or password.", loginPO.warning.getText());
+    }
+
     @DataProvider(name = "users")
-    public static Object[][] credentials() {
+    public Object[][] getValidUserNamePassowrds() {
         return new Object[][] {
                 { "heather", "heather" },
                 { "george", "george" },
@@ -92,4 +100,19 @@ public class LoginTest extends BaseTest{
                 { "dan", "dan" }
         };
     }
+
+    @DataProvider(name = "invalid")
+    public Object[][] getInValidUserNamePassowrds() {
+        return new Object[][] {
+                { "heather", "adfjk" },
+                { "george", "adfjk" },
+                { "frank", "fake" },
+                { "elizabeth", "invalid" },
+                { "cindy", "cindyinva" },
+                { "ben", "benake" },
+                { "aaron", "aaronkhkj" },
+                { "dan", "danjdfk" }
+        };
+    }
+
 }

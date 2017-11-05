@@ -1,4 +1,5 @@
 package com.tests;
 
-public class DashboardTest {
+public class DashboardTest extends BaseTest{
+
 }
