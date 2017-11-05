@@ -17,8 +17,6 @@ public class HomePO extends BasePO{
     @FindBy(how= How.LINK_TEXT, using="Logout")
     public WebElement logoutLink;
 
-    @FindBy(how= How.LINK_TEXT, using="Admin")
-    public WebElement adminLink;
 
     @FindBy(how= How.LINK_TEXT, using="Profile")
     public WebElement profileLink;

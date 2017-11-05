@@ -44,7 +44,7 @@ public class LoginPO extends BasePO{
 
         LOGGER.info("entering password: "+passwdValue);
         this.password.sendKeys(passwdValue);
-        
+
         this.submit.click();
     }
 }

@@ -2,14 +2,12 @@ package com.tests;
 
 import com.po.HomePO;
 import com.po.LoginPO;
-import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class LoginTest extends BaseTest{
-    private static final Logger LOGGER = Logger.getLogger(BaseTest.class);
     @Test
     public void validLogin() {
         SoftAssert verify = new SoftAssert();
@@ -27,7 +25,6 @@ public class LoginTest extends BaseTest{
         //if this is wrong we don't want the tests stop
         verify.assertEquals("Heather", homePO.welcomeUser.getText());
         verify.assertNotNull(homePO.logoutLink);
-        verify.assertNotNull(homePO.adminLink);
         verify.assertNotNull(homePO.profileLink);
 
 
