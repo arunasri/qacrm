@@ -2,13 +2,14 @@ package com.tests;
 
 import com.po.HomePO;
 import com.po.LoginPO;
+import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class LoginTest extends BaseTest{
-
+    private static final Logger LOGGER = Logger.getLogger(BaseTest.class);
     @Test
     public void validLogin() {
         SoftAssert verify = new SoftAssert();

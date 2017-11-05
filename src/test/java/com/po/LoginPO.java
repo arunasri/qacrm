@@ -1,11 +1,13 @@
 package com.po;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 public class LoginPO extends BasePO{
+    private static final Logger LOGGER = Logger.getLogger(LoginPO.class);
     public LoginPO(WebDriver driver) {
         super(driver);
     }
@@ -37,8 +39,12 @@ public class LoginPO extends BasePO{
 
 
     public void login(String usernameValue, String passwdValue) {
+        LOGGER.info("entering username: "+usernameValue);
         this.username.sendKeys(usernameValue);
+
+        LOGGER.info("entering password: "+passwdValue);
         this.password.sendKeys(passwdValue);
+        
         this.submit.click();
     }
 }
