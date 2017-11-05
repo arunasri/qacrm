@@ -22,4 +22,14 @@ public class HomePO extends BasePO{
 
     @FindBy(how= How.LINK_TEXT, using="Profile")
     public WebElement profileLink;
+
+
+
+
+
+
+
+
+
+
 }

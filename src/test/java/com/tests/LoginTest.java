@@ -3,6 +3,7 @@ package com.tests;
 import com.po.HomePO;
 import com.po.LoginPO;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -63,5 +64,32 @@ public class LoginTest extends BaseTest{
         verify.assertEquals("Invalid username or password.", loginPO.warning.getText());
 
         verify.assertAll();
+    }
+
+
+    @Test(dataProvider = "users")
+    public void testMultiUserLogin(String username, String password) {
+        LoginPO loginPO = new LoginPO(this.driver);
+        loginPO.login(username, password);
+
+        HomePO homePO = new HomePO(this.driver);
+        //check welcome_user span is not null,
+        //if null means user is not logged in
+        //we want to use assert here
+        Assert.assertNotNull(homePO.welcomeUser);
+    }
+
+    @DataProvider(name = "users")
+    public static Object[][] credentials() {
+        return new Object[][] {
+                { "heather", "heather" },
+                { "george", "george" },
+                { "frank", "frank" },
+                { "elizabeth", "elizabeth" },
+                { "cindy", "cindy" },
+                { "ben", "ben" },
+                { "aaron", "aaron" },
+                { "dan", "dan" }
+        };
     }
 }
