@@ -40,16 +40,16 @@ public class TaskTest extends BaseTest{
         CreateTaskPO createTaskPO = new CreateTaskPO(driver);
         createTaskPO.name.sendKeys("foo task");
 
-        new Select(createTaskPO.category).selectByVisibleText("Lunch");
-        new Select(createTaskPO.due).selectByVisibleText("Tomorrow");
+        createTaskPO.categorySelect().selectByVisibleText("Lunch");
+        createTaskPO.dueSelect().selectByVisibleText("Tomorrow");
 
         Actions action = new Actions(driver);
-        action.moveToElement(driver.findElement(By.className("select2-selection__arrow")));
+        action.moveToElement(createTaskPO.assignTo);
         action.click();
         action.sendKeys("Cindy Cluster");
         action.build().perform();
-        driver.findElement(By.className("select2-results__option--highlighted")).click();
 
+        driver.findElement(By.className("select2-results__option--highlighted")).click();
 
 
         createTaskPO.submit.click();

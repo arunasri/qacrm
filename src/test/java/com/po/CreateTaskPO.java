@@ -22,4 +22,16 @@ public class CreateTaskPO extends BasePO{
 
     @FindBy(how= How.ID, using="task_category")
     public WebElement category;
+
+    @FindBy(how= How.CLASS_NAME, using="select2-selection__arrow")
+    public WebElement assignTo;
+
+
+    public Select categorySelect() {
+        return new Select(this.category);
+    }
+
+    public Select dueSelect() {
+        return new Select(this.due);
+    }
 }
