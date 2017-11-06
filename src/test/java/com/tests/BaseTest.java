@@ -6,6 +6,7 @@ import org.apache.commons.logging.impl.Log4JLogger;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -59,5 +60,24 @@ public class BaseTest {
         loginPO.login("heather", "heather");
         HomePO homePO = new HomePO(this.driver);
         Assert.assertNotNull(homePO.welcomeUser);
+    }
+
+    public void loginAsNonAdmin() {
+        LoginPO loginPO = new LoginPO(this.driver);
+        loginPO.login("george", "george");
+        HomePO homePO = new HomePO(this.driver);
+        Assert.assertNotNull(homePO.welcomeUser);
+    }
+
+
+    //isElementPresent used for assert whether element is on the page
+    //if it is not present it is going to throw exception which return false
+    //when found it checks whether is dispalyed
+    public boolean isElementPresent(WebElement element) {
+        try{
+            return element.isDisplayed();
+        }catch (RuntimeException e){
+            return false;
+        }
     }
 }

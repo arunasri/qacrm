@@ -1,9 +1,6 @@
 package com.tests;
 
 import com.po.DashBoardPO;
-import com.po.HomePO;
-import com.po.LoginPO;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -13,10 +10,8 @@ public class DashBoardTest extends BaseTest{
     public void adminDashboard() {
         //Given admin user logged in
         logger.info("Given when logged in as admin");
-        LoginPO loginPO = new LoginPO(this.driver);
-        loginPO.login("heather", "heather");
-        HomePO homePO = new HomePO(this.driver);
-        Assert.assertNotNull(homePO.welcomeUser);
+        //Check BaseTest for this method
+        loginAsAdmin();
 
         //When on dashboard
         logger.info("When user is on home page");
@@ -35,7 +30,7 @@ public class DashBoardTest extends BaseTest{
         verifies.assertNotNull(dashboardPO.teamLink);
 
         logger.info("We need to see admin link");
-        verifies.assertNotNull(dashboardPO.adminLink);
+        verifies.assertTrue(isElementPresent(dashboardPO.adminLink), "admin link should be blank");
 
         verifies.assertAll();
     }
@@ -44,10 +39,7 @@ public class DashBoardTest extends BaseTest{
     public void nonAdminDashBoard() {
         //Given admin user logged in
         logger.info("Given when logged in as reggular user");
-        LoginPO loginPO = new LoginPO(this.driver);
-        loginPO.login("george", "george");
-        HomePO homePO = new HomePO(this.driver);
-        Assert.assertNotNull(homePO.welcomeUser);
+        loginAsNonAdmin();
 
         //When on dashboard
         logger.info("When user is on home page");
@@ -66,7 +58,7 @@ public class DashBoardTest extends BaseTest{
         verifies.assertNotNull(dashboardPO.teamLink, "non admin user should have team link");
 
         logger.info("We should not see admin link");
-        verifies.assertNull(dashboardPO.adminLink, "admin link should be empty");
+        verifies.assertFalse(isElementPresent(dashboardPO.adminLink), "admin link should be blank");
 
         verifies.assertAll();
     }
